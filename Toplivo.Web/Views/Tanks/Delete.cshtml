@@ -1,0 +1,53 @@
+﻿@model Tank
+@using Toplivo.Web.Models.Toplivo;
+@{
+    ViewBag.Title = "Удалить емкость";
+   
+}
+<h2>Удалить</h2>
+<h3>Вы уверены, что хотите удалить емкость?</h3>
+<div>
+    <h4>Емкость</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TankType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TankType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TankWeight)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TankWeight)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TankVolume)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TankVolume)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TankMaterial)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TankMaterial)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TankPicture)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TankPicture)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться", "Index")
+        </div>
+    }
+</div>

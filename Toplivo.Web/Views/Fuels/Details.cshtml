@@ -1,0 +1,32 @@
+﻿@model Fuel
+@using Toplivo.Web.Models.Toplivo;
+@{
+    ViewBag.Title = "Подробно Топливо";
+
+}
+<h2>Просмотр вида топлива</h2>
+<div>
+    <hr />
+    
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FuelType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FuelType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FuelDensity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FuelDensity)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Возврат", "Details", new { id = -1 }) |
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.FuelID })
+</p>
+
+
+

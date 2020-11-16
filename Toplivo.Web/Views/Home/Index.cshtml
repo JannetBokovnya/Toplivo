@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Топливная база";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div >
+    <table>
+        <tr>
+            
+            <td><h1>Топливная база</h1></td>
+        </tr>
+        <tr>
+            <td valign="top" colspan="2">
+                <h2>Последние  @ViewBag.NumberOperations операций</h2>
+
+                @*<table border="1" class="table">
+                    <tr>
+                        <th>Номер</th>
+                        <th>Емкость</th>
+                        <th>Топливо</th>
+                        <th>Приход (расход)</th>
+                        <th>Дата</th>
+                    </tr>
+                    @foreach (var b in ViewBag.Operations)
+                    {
+                        <tr>
+                            <td>@b.OperationID</td>
+                            <td>@b.Tank.TankType</td>
+                            <td>@b.Fuel.FuelType</td>
+                            <td>@b.Inc_Exp</td>
+                            <td>@b.Date.ToString("dd.MM.yyyy")</td>
+                        </tr>
+                    }
+                </table>*@
+                <table class="table">
+                    <tr>
+                        <th>Номер</th>
+                        <th>Емкость</th>
+                        <th>Топливо</th>
+                        <th>Приход (расход)</th>
+                        <th>Дата</th>
+
+                        <th></th>
+                    </tr>
+                    @foreach (var b in ViewBag.Operations)
+                    {
+                    <tr>
+                        <td>@b.OperationID</td>
+                        <td>@b.Tank.TankType</td>
+                        <td>@b.Fuel.FuelType</td>
+                        <td>@b.Inc_Exp</td>
+                        <td>@b.Date.ToString("dd.MM.yyyy")</td>
+                    </tr>
+                    }
+                </table>
+
+
+            </td>
+        </tr>
+
+    </table>
+</div>

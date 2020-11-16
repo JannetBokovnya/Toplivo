@@ -1,0 +1,68 @@
+﻿@using PagedList.Mvc;
+@using Toplivo.Web.Models.Toplivo;
+@model PagedList.IPagedList<Operation>
+
+@using Toplivo.Web.PL;
+
+@{
+    ViewBag.Title = "Операции";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Список операций</h2>
+<p>
+    @Html.ActionLink("Новая операция", "Create")
+</p>
+@using (Html.BeginForm("Index", "Operations", FormMethod.Get))
+{
+<p>
+    Наименование емкости: @Html.TextBox("strTankTypeFind", ((TransferData)Session["TransferData"]).strTankTypeFind)
+    Наименование топлива: @Html.TextBox("strFuelTypeFind", ((TransferData)Session["TransferData"]).strFuelTypeFind)
+    <input type="submit" value="Поиск" />
+</p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Tank.TankType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Fuel.FuelType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Inc_Exp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Date)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tank.TankType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fuel.FuelType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inc_Exp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.ActionLink("Подробнее", "Details", new { id = item.OperationID }) |
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.OperationID }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.OperationID })
+            </td>
+        </tr>
+    }
+</table>
+Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page=page,
+    strTankTypeFind= ((TransferData)Session["TransferData"]).strTankTypeFind,
+    strFuelTypeFind = ((TransferData)Session["TransferData"]).strFuelTypeFind
+}))
+

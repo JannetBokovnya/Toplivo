@@ -1,0 +1,52 @@
+﻿@model Operation
+@using Toplivo.Web.Models.Toplivo;
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Удалить данные операции</h2>
+<h3>Вы уверены, что хотите выполнить эту операцию?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fuel.FuelType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fuel.FuelType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tank.TankType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tank.TankType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Inc_Exp)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Inc_Exp)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        @Html.ActionLink("Вернуться", "Index") |
+        <input type="submit" value="Удалить" class="btn btn-default" />
+
+    </div>
+    }
+</div>
+
+

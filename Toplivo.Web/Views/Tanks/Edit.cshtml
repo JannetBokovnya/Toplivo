@@ -1,0 +1,122 @@
+﻿@using Toplivo.Web.Models.Toplivo;
+
+@model Tank
+@{
+    ViewBag.Title = "Редактирование Емкость";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<h2>Редактировать параметры емкости</h2>
+@using (Html.BeginForm("Edit", "Tanks", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+
+    <div class="form-horizontal">
+        <h4>Емкость</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.TankID)
+        @Html.HiddenFor(model => model.TankPicture)
+
+        <table border="0">
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <div style="position:relative;">
+                            <label>Фотография</label>
+                        </div>
+                        @if (Model.TankPicture == null)
+                        {
+                            <div class="form-control-static">Нет картинки</div>
+                        }
+                        else
+                        {
+                            <img class="img-thumbnail" width="250" height="250"
+                                 src="@Model.TankPicture" />
+                        }
+
+                        <input type="file" name="upload" /><br>
+
+                    </div>
+                </td>
+                <td>
+
+                    <dl class="dl-horizontal">
+                        <div class="form-group">
+                            <dt>
+                                @*@Html.DisplayNameFor(model => model.TankType)*@
+                                @Html.LabelFor(model => model.TankType, htmlAttributes: new { @class = "control-label" })
+                            </dt>
+                            <dd>
+
+                                @Html.EditorFor(model => model.TankType, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TankType, "", new { @class = "text-danger" })
+
+                            </dd>
+                        </div>
+                        <div class="form-group">
+                            <dt>
+                                @*@Html.DisplayNameFor(model => model.TankWeight)*@
+                                @Html.LabelFor(model => model.TankWeight, htmlAttributes: new { @class = "control-label" })
+                            </dt>
+                            <dd>
+                                @Html.EditorFor(model => model.TankWeight, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TankWeight, "", new { @class = "text-danger" })
+                            </dd>
+                        </div>
+                        <div class="form-group">
+                            <dt>
+                                @*@Html.DisplayNameFor(model => model.TankVolume)*@
+                                @Html.LabelFor(model => model.TankVolume, htmlAttributes: new { @class = "control-label" })
+                            </dt>
+                            <dd>
+                                @Html.EditorFor(model => model.TankVolume, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TankVolume, "", new { @class = "text-danger" })
+                            </dd>
+                        </div>
+                        <div class="form-group">
+                            <dt>
+                                @*@Html.DisplayNameFor(model => model.TankMaterial)*@
+                                @Html.LabelFor(model => model.TankMaterial, htmlAttributes: new { @class = "control-label " })
+                            </dt>
+                            <dd>
+                                @Html.EditorFor(model => model.TankMaterial, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TankMaterial, "", new { @class = "text-danger" })
+                            </dd>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-6 col-md-9">
+                                <input type="submit" value="Сохранить" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </dl>
+                </td>
+            </tr>
+        </table>
+        <div>
+
+        </div>
+        <div>
+            @Html.ActionLink("Возврат", "Edit", new { id = -1 })
+        </div>
+
+    </div>
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">// переопределение валидации на стороне клиента
+        $.validator.methods.range = function (value, element, param) {
+            var globalizedValue = value.replace(",", ".");
+            return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
+        }
+
+        $.validator.methods.number = function (value, element) {
+            return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+        }</script>
+}
+
+
+

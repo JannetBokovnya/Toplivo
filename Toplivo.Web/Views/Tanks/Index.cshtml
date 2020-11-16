@@ -1,0 +1,82 @@
+﻿@using Toplivo.Web.Models.Toplivo;
+@using Toplivo.Web.Services;
+@using Toplivo.Web.Helpers;
+
+@*@model List<Tank>*@
+@model PagedCollections<Tank>
+
+@{
+    ViewBag.Title = "Емкости";
+}
+
+<h2>Емкости топливной базы</h2>
+<p>
+    @Html.ActionLink("Добавить емкость", "Create")
+</p>
+@using (Html.BeginForm("Index", "Tanks", FormMethod.Get))
+{
+<p>
+    Наименование емкости: @Html.TextBox("SearchString", Model.PageInfo.SearchString ?? "")
+    @Html.Hidden("PageNumber", Model.PageInfo.PageNumber)
+    @*@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)*@
+    <input type="submit" value="Поиск" />
+</p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Название емкости", "Index", new { sortOrder = Model.PageInfo.NameSortParm })
+            @*@Html.ActionLink("Наименование емкости", "Index", new { sortOrder = "TankType", CurrentSort = ViewBag.CurrentSort })*@
+
+        </th>
+        <th>
+            @Html.ActionLink("Материал", "Index", new { sortOrder = Model.PageInfo.Name2SortParm })
+            @*@Html.ActionLink("Материал", "Index", new { sortOrder = "TankMaterial", CurrentSort = ViewBag.CurrentSort })*@
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PagedItems.FirstOrDefault().TankWeight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PagedItems.FirstOrDefault().TankVolume)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PagedItems.FirstOrDefault().TankPicture)
+        </th>
+
+        <th></th>
+    </tr>
+    @foreach (var item in Model.PagedItems)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TankType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TankMaterial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TankWeight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TankVolume)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.TankPicture)
+        </td>*@
+        <td>
+            <img  width="30" height="30" src="@Url.Content("~"+item.TankPicture)" alt="Нет фотографии"/>
+        </td>
+        <td>
+            @Html.ActionLink("Просмотр", "Details", new { id = item.TankID }) |
+            @Html.ActionLink("Редактирование", "Edit", new { id = item.TankID }) |
+            @Html.ActionLink("Удаление", "Delete", new { id = item.TankID })
+        </td>
+    </tr>
+    }
+</table>
+<div class="btn-group">
+    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { PageNumber = x, SearchString = Model.PageInfo.SearchString }))
+</div>
+
+

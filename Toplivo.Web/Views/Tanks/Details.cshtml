@@ -1,0 +1,54 @@
+﻿@model Tank
+@using Toplivo.Web.Models.Toplivo;
+@{
+    ViewBag.Title = "Подробно Емкость";
+    
+}
+<h2>Просмотр параметров емкости</h2>
+<div class="form-horizontal">
+    <h4>Емкость</h4>
+    <hr />
+    <table border="0">
+        <tr>
+            <td>
+                <img src="@Model.TankPicture" alt="Фотография отсутствует" width="250" height="250" />
+            </td>
+            <td>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TankType)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TankType)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TankWeight)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TankWeight)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TankVolume)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TankVolume)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TankMaterial)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TankMaterial)
+                    </dd>
+
+                </dl>
+            </td>
+        </tr>
+    </table>
+
+</div>
+<p>
+    @Html.ActionLink("Возврат", "Details", new { id = -1 }) |
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.TankID })
+
+</p>
+

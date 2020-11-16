@@ -1,0 +1,56 @@
+﻿@using Toplivo.Web.Models.Toplivo;
+@using Toplivo.Web.Services;
+@using Toplivo.Web.Helpers;
+
+@model PagedCollections<Fuel>
+
+@{
+    ViewBag.Title = "Виды топлива";
+}
+
+<h2>Виды топлива</h2>
+<p>
+    @Html.ActionLink("Добавить вид топливо", "Create")
+</p>
+@using (Html.BeginForm("Index", "Fuels", FormMethod.Get))
+{
+    <p>
+        Наименование топлива: @Html.TextBox("SearchString", Model.PageInfo.SearchString ?? "")
+        @Html.Hidden("PageNumber", Model.PageInfo.PageNumber)
+        <input type="submit" value="Поиск" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PagedItems.FirstOrDefault().FuelType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PagedItems.FirstOrDefault().FuelDensity)
+        </th>
+
+        <th></th>
+    </tr>
+    @foreach (var item in Model.PagedItems)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FuelType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FuelDensity)
+        </td>
+
+        <td>
+            @Html.ActionLink("Просмотр", "Details", new { id = item.FuelID }) |
+            @Html.ActionLink("Редактирование", "Edit", new { id = item.FuelID }) |
+            @Html.ActionLink("Удаление", "Delete", new { id = item.FuelID })
+        </td>
+    </tr>
+    }
+</table>
+<div class="btn-group">
+    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { PageNumber = x, SearchString = Model.PageInfo.SearchString }))
+</div>
+
+
